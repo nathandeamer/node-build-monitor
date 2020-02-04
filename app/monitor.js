@@ -27,20 +27,23 @@ var async = require('async'),
         else {
             sortBuildsByDate(newBuilds);
         }
-        
+
         if (errorFirst)
         {
             var errorChunk = [];
+            var runningChunk = [];
             var normalChunk = [];
             for (var i = 0; i < newBuilds.length; i++)
             {
                 if (newBuilds[i].hasErrors)
                     errorChunk.push(newBuilds[i]);
+                else if (newBuilds[i].isRunning)
+                    runningChunk.push(newBuilds[i])
                 else
                     normalChunk.push(newBuilds[i]);
             }
 
-            newBuilds = errorChunk.concat(normalChunk);
+            newBuilds = errorChunk.concat(runningChunk).concat(normalChunk);
         }
 
         return newBuilds;
