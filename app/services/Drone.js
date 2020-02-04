@@ -29,9 +29,6 @@ module.exports = function() {
     filterBuilds = function(build) {
       var result = true;
       if (self.configuration.event) {
-        console.info(self.configuration.event + "-" + build.event)
-
-
         result = self.configuration.event.includes(build.event)
       }
       return result;
