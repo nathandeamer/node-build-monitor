@@ -28,12 +28,11 @@ module.exports = function() {
     },
     filterBuilds = function(build) {
       var result = true;
-      if (self.configuration.branch) {
-        result = build.target === self.configuration.branch;
-      }
-
       if (self.configuration.event) {
-        result = build.event === self.configuration.event;
+        console.info(self.configuration.event + "-" + build.event)
+
+
+        result = self.configuration.event.includes(build.event)
       }
       return result;
     },
