@@ -29,11 +29,11 @@ module.exports = function() {
     filterBuilds = function(build) {
       var result = true;
 
-      if (self.configuration.branch) {
-        result = build.target === self.configuration.branch;
-      }
-
-      if (result && self.configuration.event) {
+      if (self.configuration.branch && self.configuration.event) {
+        result = build.target === self.configuration.branch && self.configuration.event.includes(build.event)
+      } else if (self.configuration.branch) {
+        result = build.target === self.configuration.branch
+      } else if (self.configuration.event) {
         result = self.configuration.event.includes(build.event)
       }
 
