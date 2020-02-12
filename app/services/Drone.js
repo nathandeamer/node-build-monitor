@@ -28,13 +28,15 @@ module.exports = function() {
     },
     filterBuilds = function(build) {
       var result = true;
+
       if (self.configuration.branch) {
         result = build.target === self.configuration.branch;
       }
 
-      if (self.configuration.event) {
+      if (result && self.configuration.event) {
         result = self.configuration.event.includes(build.event)
       }
+
       return result;
     },
     queryBuilds = function(callback) {
